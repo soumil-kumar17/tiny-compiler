@@ -1,16 +1,13 @@
 ﻿using TinyCompiler;
 
-const string lexerSource = "LET foo = 123456";
-const string tokenSource = "+-*/";
+const string lexerSource = "Let foo = 123456";
+const string tokenSource = "+- \"This is a string\" # This is a comment!\n */";
+const string numberSource = "+-123 9.8654*/";
+const string keywordSource = "If+-123 foo*Then/";
 
-Lexer lexer = new(tokenSource);
-// while (lexer.Peek() != char.MinValue) {
-//     lexer.GetCurrentChar();
-//     lexer.NextChar();
-// }
-
+Lexer lexer = new(lexerSource);
 var token = lexer.GetToken();
-while (token.GetTokenType() != TokenType.Eof) {
-    Console.WriteLine("TokenType : {0}", token.GetTokenType());
+while (token.Type != TokenType.Eof) {
+    Console.WriteLine("TokenType : {0}", token.Type);
     token = lexer.GetToken();
 }

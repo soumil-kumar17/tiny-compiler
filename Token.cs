@@ -1,15 +1,22 @@
 ﻿namespace TinyCompiler;
 
 public sealed class Token {
-    private readonly string _tokenText;
-    private readonly TokenType _tokenType;
+    public string Text { get; }
+    public TokenType Type { get; }
     public static readonly Token Empty = new();
 
     private Token() {}
     public Token(string tokenText, TokenType tokenType) {
-        _tokenText = tokenText;
-        _tokenType = tokenType;
+        Text = tokenText;
+        Type = tokenType;
     }
-    
-    public TokenType GetTokenType() => _tokenType;
+
+    public static TokenType? CheckForKeyword(string tokenText) {
+        foreach (TokenType type in Enum.GetValues(typeof(TokenType))) {
+            if (type.ToString() == tokenText && (int)type >= 101 && (int)type < 200) {
+                return type;
+            }
+        }
+        return TokenType.Ident;
+    }
 }

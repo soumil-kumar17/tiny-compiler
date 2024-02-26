@@ -2,7 +2,7 @@
 
 public interface ILexer {
     public void NextChar();
-    public char Peek();
+    public string Peek();
     public void Abort(string message);
     public void SkipWhiteSpace();
     public void SkipComment();
